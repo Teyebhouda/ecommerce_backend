@@ -24,7 +24,8 @@ class SettingController extends Controller
             "location" =>       getSetting('topbar_location'),
             "contact_number" => getSetting('navbar_contact_number'),
             "email" =>          getSetting('topbar_email'),
-        ];
+            "logo" =>           uploadedAsset(getSetting('navbar_logo')),
+             ];
     }
     public function socialLinks()
     {
@@ -63,6 +64,7 @@ class SettingController extends Controller
             "stripe_secret" =>      getSetting('stripe_secret'),
         ];
     }
+    
 
     public function sliderInfo()
 {
