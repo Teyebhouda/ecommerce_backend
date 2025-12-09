@@ -65,11 +65,21 @@ class SettingController extends Controller
     }
 
     public function sliderInfo()
-    {
-        $sliders = [];
-        if (getSetting('hero_sliders') != null) {
-            $sliders = json_decode(getSetting('hero_sliders'));
+{
+    $sliders = [];
+
+    if (getSetting('hero_sliders') != null) {
+        $raw = json_decode(getSetting('hero_sliders'));
+
+        // On transforme chaque slider
+        foreach ($raw as $slider) {
+            $slider->image_url = uploadedAsset($slider->image);
+            $sliders[] = $slider;
         }
-        return $sliders;
     }
+
+    return $sliders;
+}
+
+    
 }
