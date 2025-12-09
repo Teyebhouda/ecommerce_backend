@@ -127,6 +127,12 @@ Route::controller(PaymentTypesController::class)->group(function(){
 Route::controller(SettingController::class)->group(function(){
     Route::get('settings',"index");
    Route::get('settings/help-center',"contactInfo");
+    Route::get('settings/social-links',"socialLinks");
+    Route::get('settings/footer-info',"footerInfo");
+    Route::get('settings/seo-info',"seoInfo");
+    Route::get('settings/payment-info',"paymentInfo");
+    Route::get('settings/slider-info',"sliderInfo");
+
 });
 Route::controller(PageController::class)->group(function(){
     Route::get('pages/{slug}',"index");
