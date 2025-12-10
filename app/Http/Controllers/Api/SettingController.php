@@ -27,6 +27,7 @@ class SettingController extends Controller
             "contact_number" => getSetting('navbar_contact_number'),
             "email" =>          getSetting('topbar_email'),
             "logo" =>           uploadedAsset(getSetting('navbar_logo')),
+            "about_us" =>       getSetting('about_us'),
              ];
     }
     public function socialLinks()
@@ -42,10 +43,12 @@ class SettingController extends Controller
     public function footerInfo()
     {
        return [
-            "footer_about" =>       getSetting('footer_about'),
-            "footer_address" =>     getSetting('footer_address'),
-            "footer_email" =>       getSetting('footer_email'),
-            "footer_phone" =>       getSetting('footer_phone'),
+        "footer_logo" =>          uploadedAsset(getSetting('footer_logo')),
+        "copyright_text" =>      getSetting('copyright_text'),
+        "acepted_payment_methods" => getSetting('acepted_payment_methods'),
+
+           
+
         ];
     }
     public function seoInfo()
