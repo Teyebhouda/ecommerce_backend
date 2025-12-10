@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Page;
 
 class SettingController extends Controller
 {
@@ -104,5 +105,24 @@ class SettingController extends Controller
         }
 
         return response()->json($categories);
+    }
+    public function navbarPages()
+    {
+        // This function can be implemented to return navbar pages if needed
+        $pages = [];
+        if( getSetting('show_navbar_pages')) {
+            $raw = getSetting('navbar_pages') ? json_decode(getSetting('navbar_pages')) : [];
+
+            foreach ($raw as $pageId) {
+                $page = Page::find($pageId);
+                if ($page) {
+                    $pages[] = [
+                        "id" => $page->id,
+                        "title" => $page->collectLocalization('title'),
+                        "slug" => $page->slug,
+                    ];
+                }
+            }
+        }
     }
 }

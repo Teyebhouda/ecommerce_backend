@@ -132,6 +132,8 @@ Route::controller(SettingController::class)->group(function(){
     Route::get('settings/seo-info',"seoInfo");
     Route::get('settings/payment-info',"paymentInfo");
     Route::get('settings/slider-info',"sliderInfo");
+    Route::get('settings/navbar-categories',"navbarCategories");
+    Route::get('settings/navbar-pages',"navbarPages");
     
 
 });
