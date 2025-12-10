@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class SettingController extends Controller
 {
@@ -82,6 +83,26 @@ class SettingController extends Controller
 
     return $sliders;
 }
+ // Catégories Navbar
+    public function navbarCategories()
+    {
+        $categories = [];
+        if (getSetting('show_navbar_categories')) {
+            $raw = getSetting('navbar_categories') ? json_decode(getSetting('navbar_categories')) : [];
 
-    
+            foreach ($raw as $cat) {
+                $category = Category::find($cat);
+                if ($category) {
+                    $categories[] = [
+                        "id" => $category->id,
+                        "name" => $category->collectLocalization('name'),
+                        "image" => uploadedAsset($category->collectLocalization('thumbnail_image')),
+                        "slug" => $category->slug,
+                    ];
+                }
+            }
+        }
+
+        return response()->json($categories);
+    }
 }
