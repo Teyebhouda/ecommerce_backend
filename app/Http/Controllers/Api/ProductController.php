@@ -75,15 +75,29 @@ class ProductController extends Controller
     }
 
 
-    public function featured()
-    {
-        $featured_products = getSetting('featured_products_left') != null ? json_decode(getSetting('featured_products_left')) : [];
-        $featured_products[] = getSetting('featured_products_right') != null ? json_decode(getSetting('featured_products_right')) : [];
+ public function featured()
+{
+    $left = getSetting('featured_products_left') 
+        ? json_decode(getSetting('featured_products_left'), true)
+        : [];
 
-        $products = Product::whereIn('id', $featured_products)->get();
+    $right = getSetting('featured_products_right') 
+        ? json_decode(getSetting('featured_products_right'), true)
+        : [];
 
-        return ProductMiniResource::collection($products);
-    }
+    // Fusion propre
+    $featured_products = array_merge($left, $right);
+
+    // Sécuriser au cas où
+    $featured_products = array_filter($featured_products);
+
+    $products = Product::whereIn('id', $featured_products)->get();
+
+    return ProductMiniResource::collection($products);
+}
+
+
+
     public function trendingProducts()
     {
 
