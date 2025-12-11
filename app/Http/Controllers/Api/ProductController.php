@@ -85,6 +85,7 @@ class ProductController extends Controller
         ? json_decode(getSetting('featured_products_right'), true)
         : [];
 
+
     // Fusion propre
     $featured_products = array_merge($left, $right);
 
@@ -92,8 +93,18 @@ class ProductController extends Controller
     $featured_products = array_filter($featured_products);
 
     $products = Product::whereIn('id', $featured_products)->get();
+    $featured_products_banner = getSetting('featured_center_banner') 
+        ? uploadedAsset(getSetting('featured_center_banner')) 
+        : null;
+        $featured_banner_link = getSetting('featured_banner_link')
+        ? getSetting('featured_banner_link')
+        : null;
 
-    return ProductMiniResource::collection($products);
+
+    return ProductMiniResource::collection($products)->additional([
+        'featured_products_banner' => $featured_products_banner,
+        'featured_banner_link' => $featured_banner_link,
+    ]);
 }
 
 
