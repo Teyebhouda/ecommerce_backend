@@ -101,7 +101,7 @@ class ProductController extends Controller
         : null;
 
 
-    return ProductMiniResource::collection($products)->additional([
+    return ProductDetailsResource::collection($products)->additional([
         'featured_products_banner' => $featured_products_banner,
         'featured_banner_link' => $featured_banner_link,
     ]);
@@ -114,10 +114,10 @@ class ProductController extends Controller
 
         $trending_products = getSetting('top_trending_products') != null ? json_decode(getSetting('top_trending_products')) : [];
         $products = Product::whereIn('id', $trending_products)->get();
+      
 
 
-
-        return ProductMiniResource::collection($products);
+        return ProductDetailsResource::collection($products);
     }
 
     /**
