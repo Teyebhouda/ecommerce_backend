@@ -113,7 +113,7 @@ Route::controller(LogisticController::class)->group(function(){
 
 Route::controller(BannerController::class)->group(function(){
     Route::get('banner/home',"homeBanner");
-   // Route::get('banner/second',"secondBanner");
+    Route::get('banner/second',"secondBanner");
 });
 Route::controller(ScheduleDeliveryTimeController::class)->group(function(){
     Route::get('time-slot',"index");

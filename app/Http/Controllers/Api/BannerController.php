@@ -10,7 +10,7 @@ class BannerController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     *a
      * @return \Illuminate\Http\Response
      */
     public function homeBanner()
@@ -25,8 +25,8 @@ class BannerController extends Controller
     public function secondBanner()
     {
         $banners = [];
-        if (getSetting('banner_section_one_banners') != null) {
-            $banners = json_decode(getSetting('banner_section_one_banners'));
+        if (getSetting('banner_section_two_banner_two') != null) {
+            $banners = json_decode(getSetting('banner_section_two_banner_two'));
         }
         return BannerResource::collection($banners);
     }
